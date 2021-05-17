@@ -8,18 +8,28 @@
 <head>
 <meta charset="UTF-8">
 <title>/board/list.jsp</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/step03_custom.css" />
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
 </head>
 <body>
+<jsp:include page="../include/navbar.jsp">
+	<jsp:param value="board" name="category"/>
+</jsp:include>
 <div class="container">
+	<ol class="breadcrumb">
+		<li><a href="list.jsp">목록</a></li>
+	</ol>
 	<h1>게시글 목록 입니다.</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>글 번호</th>
-				<th>작성자</th>
-				<th>제목</th>
-				<th>등록일</th>
-			</tr>
+	<table class="table table-striped table-condensed">
+		<!-- table 칼럼의 폭 강제 하기 -->
+		<colgroup>
+			<col class="col-xs-1"/>
+			<col class="col-xs-2"/>
+			<col class="col-xs-7"/>
+			<col class="col-xs-2"/>
+		</colgroup>
 		</thead>
 		<%
 			//BoardDao 객체를 이용해서 글 목록을 얻어온다. 
@@ -37,5 +47,6 @@
 		</tbody>
 	</table>
 </div>
+<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
