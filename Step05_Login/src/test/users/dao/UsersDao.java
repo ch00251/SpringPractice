@@ -16,6 +16,41 @@ public class UsersDao {
 		}
 		return dao;
 	}
+	//인자로 전달되는 아이디에 해당하는 가입정보를 리턴해주는 메소드
+	public UsersDto getData(String id) {
+		UsersDto dto=null;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=new DbcpBean().getConn();
+			String sql="select pwd,email,regdate from users where id=?";
+			pstmt=conn.prepareStatement(sql);
+			//?에 값 바인딩
+			pstmt=conn.prepareStatement(sql);
+			//?에 값 바인딩
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				dto=new UsersDto();
+				dto.setId(id);
+				dto.setPwd(rs.getString("pwd"));
+				dto.setEmail(rs.getString("email"));
+				dto.setRegdate(rs.getString("regdate"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				//connection pool에 반납하기
+				if(conn!=null)conn.close();
+			}catch(Exception e) {}
+		}
+		return dto;
+	}
+	
 	//인자로 전달되는 아이디가 존재하는지 여부를 리턴하는 메소드
 	public boolean isExist(String inputId) {
 		boolean isExist=false; //아이디가 이미 존재 하는지 여부 
