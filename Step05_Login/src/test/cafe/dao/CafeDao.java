@@ -18,6 +18,34 @@ public class CafeDao {
 		}
 		return dao;
 	}
+	//글 전체의 갯수를 리턴하는 메소드
+	public int getCount() {
+		int rowCount=0;
+		Connection  conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=new DbcpBean().getConn();
+			String sql="select max(rownum) as count from board_cafe";
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				rowCount=rs.getInt("count");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e) {
+				
+			}
+		}
+		return rowCount;
+	}
+	
 	//새 글을 저장하는 메소드
 	public boolean insert(CafeDto dto) {
 		Connection conn=null;
@@ -51,26 +79,45 @@ public class CafeDao {
 	}
 	
 	//글 목록을 리턴하는 메소드  ( ctrl + shift + o : auto import )
-	public List<CafeDto> getList(){
+	public List<CafeDto> getList(CafeDto dto){
 		List<CafeDto> list=new ArrayList<CafeDto>();
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			conn=new DbcpBean().getConn();
-			String sql="select num,writer,title,viewCount,regdate from board_cafe order by num desc";
+			/*
+				SELECT * 
+				FROM
+			    	(SELECT result1.*, ROWNUM AS rnum
+			    FROM
+			        (SELECT num,writer,title,viewCount,regdate
+			        FROM board_cafe
+			        ORDER BY num DESC) result1)
+				WHERE rnum BETWEEN ? AND ?
+			 */
+			String sql="SELECT *"
+					+ " FROM"
+					+ " (SELECT result1.*, ROWNUM AS rnum"
+					+ " FROM"
+					+ " (SELECT num,writer,title,viewCount,regdate"
+					+ " FROM board_cafe"
+					+ " ORDER BY num DESC) result1)"
+					+ " WHERE rnum BETWEEN ? AND ?";
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getStartRowNum());
+			pstmt.setInt(2, dto.getEndRowNum());
 			rs=pstmt.executeQuery();
 			while(rs.next()) {//반복문 돌면서
 				//select된 row의 정보를 CafeDto 객체에 담아서
-				CafeDto dto=new CafeDto();
-				dto.setNum(rs.getInt("num"));
-				dto.setWriter(rs.getString("writer"));
-				dto.setTitle(rs.getString("title"));
-				dto.setViewCount(rs.getInt("viewCount"));
-				dto.setRegdate(rs.getString("regdate"));
+				CafeDto tmp=new CafeDto();
+				tmp.setNum(rs.getInt("num"));
+				tmp.setWriter(rs.getString("writer"));
+				tmp.setTitle(rs.getString("title"));
+				tmp.setViewCount(rs.getInt("viewCount"));
+				tmp.setRegdate(rs.getString("regdate"));
 				//ArrayList객체에 누적 시킨다.
-				list.add(dto);
+				list.add(tmp);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
