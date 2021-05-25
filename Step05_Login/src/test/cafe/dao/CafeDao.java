@@ -18,6 +18,34 @@ public class CafeDao {
 		}
 		return dao;
 	}
+	//글 정보를 삭제하는 메소드
+	public boolean delete(int num) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		int flag=0;
+		try {
+			conn=new DbcpBean().getConn();
+			String sql="delete from board_cafe where num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			flag=pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e) {
+				
+			}
+		}
+		if(flag>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	//글 정보를 수정하는 메소드
 	public boolean update(CafeDto dto) {
 		Connection conn=null;
