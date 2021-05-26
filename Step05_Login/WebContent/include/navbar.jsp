@@ -26,8 +26,8 @@
 		<!-- xs 영역에서는 숨겨졌다가 버튼을 누르면 나오게 할 컨텐츠를 넣을 div -->
 		<div class="collapse navbar-collapse" id="one">
 			<ul class="nav navbar-nav">
-				<li <%if(category.equals("cafe")){%>class="active"<%}%>><a href="${pageContext.request.contextPath }/cafe/list.jsp">Cafe</a></li>
-				<li><a href="#">Shop</a></li>		
+				<li <%if(category.equals("cafe")){%>class="active"<%}%>><a href="${pageContext.request.contextPath}/cafe/list.jsp">Cafe</a></li>
+				<li <%if(category.equals("file")){%>class="active"<%}%>><a href="${pageContext.request.contextPath}/file/list.jsp">자료실</a></li>		
 			</ul>
 			<%if(id==null){ %>
 				<div class="pull-right">
