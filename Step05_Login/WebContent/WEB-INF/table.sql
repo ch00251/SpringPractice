@@ -26,4 +26,6 @@ downCount number default 0, -- 다운로드 횟수
 regdate date );
 
 create sequence board_file_seq;
-)
+
+alter table users add(profile varchar2(50));
+

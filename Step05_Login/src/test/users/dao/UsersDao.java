@@ -16,6 +16,35 @@ public class UsersDao {
 		}
 		return dao;
 	}
+	//프로파일 이미지 정보를 업데이트 하는 메소드
+	public boolean updateProfile(UsersDto dto) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		int flag=0;
+		try {
+			conn=new DbcpBean().getConn();
+			String sql="update users set profile=? where id=?";
+			pstmt=conn.prepareStatement(sql);
+			//?에 값 바인딩하기
+			pstmt.setString(1, dto.getProfile());
+			pstmt.setString(2, dto.getId());
+			flag=pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e) {
+			}
+		}
+		if(flag>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	//회원가입 정보를 삭제하는 메소드
 	public boolean delete(String id) {
 		Connection conn=null;
@@ -113,7 +142,7 @@ public class UsersDao {
 		ResultSet rs=null;
 		try {
 			conn=new DbcpBean().getConn();
-			String sql="select pwd,email,regdate from users where id=?";
+			String sql="select pwd,email,regdate,profile from users where id=?";
 			pstmt=conn.prepareStatement(sql);
 			//?에 값 바인딩
 			pstmt=conn.prepareStatement(sql);
@@ -126,6 +155,7 @@ public class UsersDao {
 				dto.setPwd(rs.getString("pwd"));
 				dto.setEmail(rs.getString("email"));
 				dto.setRegdate(rs.getString("regdate"));
+				dto.setProfile(rs.getString("profile"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
