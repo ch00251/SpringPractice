@@ -85,7 +85,7 @@ public class CafeDao {
 		int flag=0;
 		try {
 			conn=new DbcpBean().getConn();
-			String sql="update board_cafe set viewCount=viewCount+1 whre num=?";
+			String sql="update board_cafe set viewCount=viewCount+1 where num=?";
 			pstmt=conn.prepareStatement(sql);
 			//?에 값 바인딩
 			pstmt.setInt(1, num);
