@@ -43,4 +43,21 @@ public class TodoController {
 		//Model과 view page정보가 담긴 객체를 리턴해준다.
 		return mView;
 	}
+	
+	//메소드의 인자로 ModelAndView 객체를 받을 수 있는 변수를 선언하면
+	//스프링 프레임워크가 해당객체를 생성해서 인자로 전달해준다.
+	@RequestMapping("/todo/list3")
+	public ModelAndView list3(ModelAndView mView) {
+		//Model
+		List<String> todoList=new ArrayList<String>();
+		todoList.add("html 공부하기");
+		todoList.add("css  공부하기");
+		todoList.add("javascript 공부하기");
+		//인자로 전달 받은 객체에 Model을 담고
+		mView.addObject("todoList", todoList);
+		//인자로 전달 받은 객체에 view page의 정보를 담고
+		mView.setViewName("/todo/list");
+		//인자로 전달 받은 객체의 참조값을 리턴해준다.
+		return mView;
+	}
 }
