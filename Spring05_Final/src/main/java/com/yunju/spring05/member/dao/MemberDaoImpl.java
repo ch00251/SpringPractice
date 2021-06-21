@@ -20,4 +20,8 @@ public class MemberDaoImpl implements MemberDao{
 		List<MemberDto> list=session.selectList("member.getList");
 		return list;
 	}
+	@Override
+	public void delete(int num) {
+		session.delete("member.delete",num);
+	}
 }
