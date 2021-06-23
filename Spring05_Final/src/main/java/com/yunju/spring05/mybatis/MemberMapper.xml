@@ -14,4 +14,14 @@
 		parameterType="com.yunju.spring05.member.dto.MemberDto">
 		insert into member (num,name,addr) values(member_seq.nextval,#{name},#{addr})
 	</insert>
+	
+	<select id="getData" parameterType="int"
+		resultType="com.yunju.spring05.member.dto.MemberDto">
+		select num,name,addr from member where num=#{num}
+	</select>
+	
+	<update id="update"
+		parameterType="com.yunju.spring05.member.dto.MemberDto">
+		update member set name=#{name}, addr=#{addr} where num=#{num}
+	</update>
 </mapper>
