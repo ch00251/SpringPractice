@@ -11,22 +11,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yunju.spring05.member.dao.MemberDao;
 import com.yunju.spring05.member.dto.MemberDto;
+import com.yunju.spring05.member.service.MemberService;
 
 @Controller
 public class MemberController {
 	//의존 객체 주입 받기(DI)
 	@Autowired
 	private MemberDao dao;
+	@Autowired
+	private MemberService service;
 	
 	//회원 목록 보기 요청(/member/list.do)을 처리할 컨트롤러의 메소드
 	@RequestMapping("/member/list")
 	public ModelAndView list(ModelAndView mView) {
-		//회원 목록을 얻어오려면?
-		List<MemberDto> list=dao.getList();
-		
-		mView.addObject("list",list);
+		//MemberServiceImpl 객체를 이용해서 비즈니스 로직 처리
+		service.getList(mView);
+		//view page정보를 담고
 		mView.setViewName("member/list");
-		return mView;
+		return mView;//Model과 view page정보가 담긴 객체를 리턴해준다
 	}
 	//회원정보 삭제 요청 처리
 	@RequestMapping("/member/delete")
