@@ -9,4 +9,8 @@
 	<insert id="insert" parameterType="usersDto">
 		insert into users (id,pwd,email,regdate) values(#{id},#{pwd},#{email},sysdate)
 	</insert>
+	
+	<select id="getPwdHash" parameterType="String" resultType="String">
+		select pwd from users where id=#{inputId}
+	</select>
 </mapper>
