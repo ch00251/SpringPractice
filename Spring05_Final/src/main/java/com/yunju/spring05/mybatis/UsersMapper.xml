@@ -13,4 +13,8 @@
 	<select id="getPwdHash" parameterType="String" resultType="String">
 		select pwd from users where id=#{inputId}
 	</select>
+	
+	<select id="getData" parameterType="String" resultType="usersDto">
+		select id,email,regdate,profile from users where id=#{id}
+	</select>
 </mapper>

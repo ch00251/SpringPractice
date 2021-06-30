@@ -37,4 +37,9 @@ public class UsersDaoImpl  implements UsersDao{
 		//select된 비밀번호를 리턴해준다
 		return savedPwd;
 	}
+	
+	@Override
+	public UsersDto getData(String id) {
+		return session.selectOne("users.getData", id);
+	}
 }
