@@ -219,4 +219,19 @@ public class UsersController {
 		//개인정보 보기로 다시 리다일렉트 이동시킨다.
 		return new ModelAndView("redirect:/users/info.do");
 	}
+	
+	@RequestMapping("/users/delete")
+	public ModelAndView authDelete(HttpServletRequest request,
+					ModelAndView mView) {
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		//서비스를 이용해서 해당 회원 정보 삭제
+		service.deleteUser(id);
+		//로그아웃 처리
+		session.invalidate();
+		
+		mView.addObject("id", id);
+		mView.setViewName("users/delete");
+		return mView;
+	}
 }
