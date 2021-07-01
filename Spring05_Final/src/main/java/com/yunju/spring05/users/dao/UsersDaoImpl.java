@@ -42,4 +42,9 @@ public class UsersDaoImpl  implements UsersDao{
 	public UsersDto getData(String id) {
 		return session.selectOne("users.getData", id);
 	}
+	
+	@Override
+	public void updateProfile(UsersDto dto) {
+		session.selectOne("users.updateProfile", dto);
+	}
 }

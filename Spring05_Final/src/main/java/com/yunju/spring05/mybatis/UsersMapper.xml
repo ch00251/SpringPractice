@@ -17,4 +17,8 @@
 	<select id="getData" parameterType="String" resultType="usersDto">
 		select id,email,regdate,profile from users where id=#{id}
 	</select>
+	
+	<update id="updateProfile" parameterType="usersDto">
+		update users set profile=#{profile} where id=#{id}
+	</update>
 </mapper>
