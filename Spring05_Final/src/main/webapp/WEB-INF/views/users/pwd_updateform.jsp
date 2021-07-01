@@ -13,7 +13,7 @@
 	<form action="pwd_update.do" method="post">
 		<div>
 			<label for="pwd">기존 비밀번호</label>
-			<input type="password" id="pwd" name="id" />
+			<input type="password" id="pwd" name="pwd" />
 		</div>
 		<div>
 			<label for="newPwd">새 비밀번호</label>
