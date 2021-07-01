@@ -210,4 +210,13 @@ public class UsersController {
 		mView.setViewName("users/updateform");
 		return mView;
 	}
+	
+	@RequestMapping(value="/users/update", method=RequestMethod.POST)
+	public ModelAndView authUpdate(@ModelAttribute UsersDto dto, 
+				HttpServletRequest request) {
+		//서비스를 이용해서 수정 반영하고
+		service.updateUser(dto);
+		//개인정보 보기로 다시 리다일렉트 이동시킨다.
+		return new ModelAndView("redirect:/users/info.do");
+	}
 }
