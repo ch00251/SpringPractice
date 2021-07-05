@@ -7,10 +7,12 @@
 	<typeAliases>
 		 <typeAlias type="com.yunju.spring05.member.dto.MemberDto" alias="memberDto"/>
 		 <typeAlias type="com.yunju.spring05.users.dto.UsersDto" alias="usersDto"/>
+		 <typealias type="com.yunju.spring05.file.dto.FileDto" alias="fileDto"/>
 	</typeAliases>
 	<!-- mapper 설정 -->
 	<mappers>
 		<mapper resource="com/yunju/spring05/mybatis/MemberMapper.xml"/>
 		<mapper resource="com/yunju/spring05/mybatis/UsersMapper.xml"/>
+		<mapper resource="com/yunju/spring05/mybatis/FileMapper.xml"/>
 	</mappers>
 </configuration> 
