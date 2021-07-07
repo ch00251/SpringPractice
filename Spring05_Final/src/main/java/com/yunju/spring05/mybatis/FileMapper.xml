@@ -23,4 +23,15 @@
 		values(board_file_seq.nextval, #{writer}, #{title}, #{orgFileName},
 		#{saveFileName}, #{fileSize}, #{downCount}, sysdate)
 	</insert>
+	
+	<select id="getData" parameterType="int" resultType="fileDto">
+		select num,writer,title,orgFileName,saveFileName,fileSize,
+			downCount,regdate
+		from board_file where num=#{num}
+	</select>
+	
+	<update id="addDownCount" parameterType="int">
+		update board_file set downCount=downCount+1
+		where num=#{num}
+	</update>
 </mapper>
