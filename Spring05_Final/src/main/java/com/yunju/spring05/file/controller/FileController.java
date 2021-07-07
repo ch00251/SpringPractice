@@ -53,4 +53,11 @@ public class FileController {
 		mView.setViewName("fileDownView");
 		return mView;
 	}
+	
+	//颇老 昏力 贸府
+	@RequestMapping("/file/delete")
+	public ModelAndView authDelete(HttpServletRequest request) {
+		service.removeFile(request);
+		return new ModelAndView("redirect:/file/list.do");
+	}
 }

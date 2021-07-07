@@ -34,4 +34,8 @@
 		update board_file set downCount=downCount+1
 		where num=#{num}
 	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from board_file where num=#{num}
+	</delete>
 </mapper>
