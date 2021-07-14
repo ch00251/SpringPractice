@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/cafe/insertform.jsp</title>
+<title>/cafe/private/insertform.jsp</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
-	/* textarea의 크기가 smartEditor의 크기가 된다ㅣ */
+	/* textarea 의 크기가 SmartEditor 의 크기가 된다. */
 	#content{
-		display:none;
-		width:100%;
-		height:400px;
+		display: none;
+		width: 100%;
+		height: 400px;
 	}
 </style>
 </head>
@@ -21,39 +21,40 @@
 </jsp:include>
 <div class="container">
 	<ol class="breadcrumb">
-		<li><a href="${pageContext.request.contextPath}/cafe/list.do">목록</a></li>
+		<li><a href="${pageContext.request.contextPath }/cafe/list.do">목록</a></li>
 		<li>새글 작성</li>
 	</ol>
 	<form action="insert.do" method="post">
 		<div class="form-group">
 			<label for="writer">작성자</label>
-			<input type="text" class="form-control" value="${id }" disabled/>
+			<input class="form-control" type="text" value="${id }" disabled/>
 		</div>
 		<div class="form-group">
 			<label for="title">제목</label>
-			<input type="text" class="form-control" name="title" id="title" />
+			<input class="form-control" type="text" 
+				name="title" id="title"/>
 		</div>
 		<div class="form-group">
 			<label for="content">내용</label>
-			<textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+			<textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
 		</div>
-		<button class="btn btn-primary" type="submit" onclick="submitContent(this)">저장</button>
+		<button class="btn btn-primary" type="submit" onclick="submitContents(this);">저장</button>
 		<button class="btn btn-warning" type="reset">취소</button>
 	</form>
 </div>
 <%--
-	[ SmartEditor를 사용하기 위한 설정 ]
+	[ SmartEditor 를 사용하기 위한 설정 ]
 	
-	1. WebContent에 SmartEditor 폴더를 복사해서 붙여 넣기
-	2. WebContent에 upload 폴더 만들어 두기
-	3. WebContent/WEB-INF/lib 폴더에
-	   commons-io.jar 파일과 commons-fileupload.jar 파일 붙여넣기
-	4. <textarea id="content" name="content">
-	   content가 아래의 javascript에서 사용 되기때문에 다른 이름으로 바꾸고싶으면
-	   javascript에서 content를 찾아서 모두 다른 이름으로 바꿔주면 된다.
-	5. textarea의 크기가 SmartEditor의 크기가 된다.
-	6. 폼을 제출하고 싶으면 submitContents(this)라는 javascript가 
-	     폼 안에 있는 버튼에서 실행되면 된다.
+	1. WebContent 에 SmartEditor  폴더를 복사해서 붙여 넣기
+	2. WebContent 에 upload 폴더 만들어 두기
+	3. WebContent/WEB-INF/lib 폴더에 
+	   commons-io.jar 파일과 commons-fileupload.jar 파일 붙여 넣기
+	4. <textarea id="content" name="content"> 
+	   content 가 아래의 javascript 에서 사용 되기때문에 다른 이름으로 바꾸고 
+	      싶으면 javascript 에서  content 를 찾아서 모두 다른 이름으로 바꿔주면 된다. 
+	5. textarea 의 크기가 SmartEditor  의 크기가 된다.
+	6. 폼을 제출하고 싶으면  submitContents(this) 라는 javascript 가 
+	      폼 안에 있는 버튼에서 실행되면 된다.
  --%>
 <!-- SmartEditor 에서 필요한 javascript 로딩  -->
 <script src="${pageContext.request.contextPath }/SmartEditor/js/HuskyEZCreator.js"></script>
