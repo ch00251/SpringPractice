@@ -67,7 +67,7 @@
 				</when>
 			</choose>
 			ORDER BY num DESC) result1
-		WHERE num=#{num }
+		WHERE num=#{num}
 	</select>
 	<select id="getData2" parameterType="int" resultType="cafeDto">
 		SELECT result1.*
@@ -78,11 +78,12 @@
 			LEAD(num, 1, 0) OVER(ORDER BY num DESC) AS nextNum
 			FROM board_cafe
 			ORDER BY num DESC) result1
-		WHERE num=#{num }
+		WHERE num=#{num}
 	</select>
 	
 	<delete id="delete" parameterType="int">
-		delete from board_cafe where num=#{num}
+		DELETE FROM board_cafe
+		WHERE num=#{num}
 	</delete>
 	
 	<update id="addViewCount" parameterType="int">

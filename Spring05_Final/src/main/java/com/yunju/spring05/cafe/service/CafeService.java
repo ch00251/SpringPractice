@@ -10,4 +10,6 @@ public interface CafeService {
 	public void saveContent(CafeDto dto);
 	//글 자세히 보기
 	public void getDetail(HttpServletRequest request);
+	//글 삭제
+	public void deleteContent(int num);
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.yunju.spring05.cafe.dao.CafeDao;
 import com.yunju.spring05.cafe.dto.CafeDto;
+import com.yunju.spring05.exception.CanNotDeleteException;
 
 @Service
 public class CafeServiceImpl implements CafeService{
@@ -157,6 +158,11 @@ public class CafeServiceImpl implements CafeService{
 		//글정보를 얻어와서
 		CafeDto dto2=cafeDao.getData(dto);
 		//request 에 글정보를 담고 
-		request.setAttribute("dto", dto2);		
+	request.setAttribute("dto", dto2);		
+	}
+	
+	@Override
+	public void deleteContent(int num) {
+		cafeDao.delete(num);
 	}
 }
