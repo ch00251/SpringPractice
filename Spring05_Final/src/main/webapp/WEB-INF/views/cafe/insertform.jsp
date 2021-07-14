@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/cafe/private/insertform.jsp</title>
+<title>/cafe/insertform.jsp</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 	/* textarea 의 크기가 SmartEditor 의 크기가 된다. */
