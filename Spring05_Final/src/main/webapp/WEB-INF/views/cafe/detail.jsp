@@ -269,6 +269,18 @@
 		}
 	});
 	
+	//폼에 click 이벤트가 일어 났을 때 실행할 함수 등록
+	$(".comment form textarea").on("click", function(){
+		//로그인 여부
+		var isLogin=${not empty id};
+		if(isLogin==false){
+			var isMove=confirm("로그인 페이지로 이동하시겠습니까?");
+			if(isMove){
+				location.href="${pageContext.request.contextPath}/users/loginform.do?url=${pageContext.request.contextPath}/cafe/detail.do?num=${dto.num}"
+			}
+		}
+	})
+	
 	//답글 달기 링크를 클릭했을때 실행할 함수 등록
 	$(".comment .reply_link").click(function(){
 		$(this)
