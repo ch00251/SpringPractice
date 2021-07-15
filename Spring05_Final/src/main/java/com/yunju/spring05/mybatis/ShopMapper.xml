@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop">
+	<select id="getList" resultType="shopDto">
+		select num,name,price,remainCount
+		from shop order by num asc
+	</select>
+	
+	<select id="getPrice" parameterType="int" resultType="int">
+		select price from shop
+		where num=#{num}
+	</select>
+	
+	<update id="minusMoney" parameterType="shopDto">
+		update client_account
+		set money=money-#{price}
+		where id=#{id}
+	</update>
+	
+	<update id="plusPoint" parameterType="shopDto">
+		update client_account
+		set point=point+#{price}*0.1
+		where id=#{id}
+	</update>
+	
+	<update id="minusCount" parameterType="int">
+		update shop
+		set remainCount=remainCount-1
+		where num=#{num}
+	</update>
+	
+	<insert id="addOrder" parameterType="orderDto">
+		insert into client_order
+		(num,id,code,addr)
+		values(client_order_seq.nextval,#{id},#{code},#{addr})
+	</insert>
+</mapper>
