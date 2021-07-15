@@ -85,7 +85,6 @@
 		DELETE FROM board_cafe
 		WHERE num=#{num}
 	</delete>
-	
 	<update id="addViewCount" parameterType="int">
 		update board_cafe set viewCount=viewCount+1
 		where num=#{num}
