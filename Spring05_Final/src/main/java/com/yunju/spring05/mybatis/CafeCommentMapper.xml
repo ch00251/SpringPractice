@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cafeComment">
+	<select id="getList" parameterType="int" resultType="cafeCommentDto">
+		select num,writer,content,target_id,ref_group,
+			comment_group, deleted, board_cafe_comment.regdate, profile
+		from board_cafe_comment
+		inner join users
+		on board_cafe_comment.writer=users.id
+		where ref_group=#{ref_group}
+	</select>
+	
+	<update id="delete" parameterType="int">
+		update board_cafe_comment set deleted='yes'
+		where num=#{num}
+	</update>
+	
+	<insert id="insert" parameterType="cafeCommentDto">
+		insert into board_cafe_comment
+		(num, wirter, content, target_id, ref_group, comment_group, regdate)
+		values(#{num}, #{writer}, #{content}, #{target_id}, #{ref_group},
+		#{comment_group}, SYSDATE)
+	</insert>
+	
+	<select id="getSequence" resultType="int">
+		select board_cafe_comment_seq.nexval form dual
+	</select>
+	
+	<update id="update" parameterType="cafeCommentDto">
+		update board_cafe_comment
+		set content=#{content}
+		where num=#{num}
+	</update>
+</mapper>
