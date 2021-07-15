@@ -245,9 +245,9 @@
 		var isDelete=confirm("확인을 누르면 댓글이 삭제 됩니다.");
 		if(isDelete){
 			$.ajax({
-				url:"comment_delete.do",
+				url:"comment_delete.do",// "/cafe/comment_delete.do" 요청
 				method:"post",
-				data:{"num":num},
+				data:{"num":num},// num 이라는 파라미터명으로 삭제할 댓글의 번호 전송
 				success:function(responseData){
 					if(responseData.isSuccess){
 						var sel="#comment"+num;
