@@ -14,7 +14,6 @@ import com.yunju.spring05.cafe.dao.CafeCommentDao;
 import com.yunju.spring05.cafe.dao.CafeDao;
 import com.yunju.spring05.cafe.dto.CafeCommentDto;
 import com.yunju.spring05.cafe.dto.CafeDto;
-import com.yunju.spring05.exception.CanNotDeleteException;
 
 @Service
 public class CafeServiceImpl implements CafeService{
@@ -163,7 +162,10 @@ public class CafeServiceImpl implements CafeService{
 		//글정보를 얻어와서
 		CafeDto dto2=cafeDao.getData(dto);
 		//request 에 글정보를 담고 
-	request.setAttribute("dto", dto2);		
+		request.setAttribute("dto", dto2);	
+		//댓글 목록을 얻어와서 request에 담아준다
+		List<CafeCommentDto> commentList=cafeCommentDao.getList(num);
+		request.setAttribute("commentList", commentList);
 	}
 	
 	@Override

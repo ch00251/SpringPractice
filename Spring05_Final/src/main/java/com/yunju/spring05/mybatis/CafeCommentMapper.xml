@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cafeComment">
 	<select id="getList" parameterType="int" resultType="cafeCommentDto">
-		select num,writer,content,target_id,ref_group,
-			comment_group, deleted, board_cafe_comment.regdate, profile
-		from board_cafe_comment
-		inner join users
-		on board_cafe_comment.writer=users.id
-		where ref_group=#{ref_group}
-		order by comment_group asc, num asc
+		select board_cafe_comment.num, board_cafe_comment.writer, board_cafe_comment.content, board_cafe_comment.target_id, board_cafe_comment.ref_group,
+			board_cafe_comment.comment_group, board_cafe_comment.deleted, board_cafe_comment.regdate, board_cafe_comment.profile
+			from board_cafe_comment
+			inner join users
+			on board_cafe_comment.writer=users.id
+			where ref_group=#{ref_group}
+			order by comment_group asc, num asc
 	</select>
 	
 	<update id="delete" parameterType="int">
@@ -20,7 +20,7 @@
 		insert into board_cafe_comment
 		(num, writer, content, target_id, ref_group, comment_group, regdate)
 		values(#{num}, #{writer}, #{content}, #{target_id}, #{ref_group},
-		#{comment_group}, SYSDATE)
+		#{comment_group}, sysdate)
 	</insert>
 	
 	<select id="getSequence" resultType="int">
