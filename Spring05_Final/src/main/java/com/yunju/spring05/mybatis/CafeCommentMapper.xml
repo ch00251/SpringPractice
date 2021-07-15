@@ -8,6 +8,7 @@
 		inner join users
 		on board_cafe_comment.writer=users.id
 		where ref_group=#{ref_group}
+		order by comment_group asc, num asc
 	</select>
 	
 	<update id="delete" parameterType="int">
@@ -17,13 +18,13 @@
 	
 	<insert id="insert" parameterType="cafeCommentDto">
 		insert into board_cafe_comment
-		(num, wirter, content, target_id, ref_group, comment_group, regdate)
+		(num, writer, content, target_id, ref_group, comment_group, regdate)
 		values(#{num}, #{writer}, #{content}, #{target_id}, #{ref_group},
 		#{comment_group}, SYSDATE)
 	</insert>
 	
 	<select id="getSequence" resultType="int">
-		select board_cafe_comment_seq.nexval form dual
+		select board_cafe_comment_seq.nextval from dual
 	</select>
 	
 	<update id="update" parameterType="cafeCommentDto">

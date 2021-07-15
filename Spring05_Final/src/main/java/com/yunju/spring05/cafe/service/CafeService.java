@@ -18,4 +18,6 @@ public interface CafeService {
 	public void getUpdateData(ModelAndView mView,int num);
 	//글 수정
 	public void updateContent(CafeDto dto);
+	//댓글 저장하는 메소드
+	public void saveComment(HttpServletRequest request);
 }
