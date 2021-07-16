@@ -14,5 +14,5 @@ public interface ShopDao {
 	//포인트를 증가시키는 메소드
 	public void plusPoint(ShopDto dto);
 	//특정 상품의 가격을 리턴하는 메소드
-	public void getPrice(int num);
+	public int getPrice(int num);
 }
