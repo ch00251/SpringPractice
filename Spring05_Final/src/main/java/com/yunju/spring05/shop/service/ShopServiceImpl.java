@@ -1,6 +1,7 @@
 package com.yunju.spring05.shop.service;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yunju.spring05.exception.NoDeliveryException;
 import com.yunju.spring05.shop.dao.OrderDao;
 import com.yunju.spring05.shop.dao.ShopDao;
 import com.yunju.spring05.shop.dto.OrderDto;

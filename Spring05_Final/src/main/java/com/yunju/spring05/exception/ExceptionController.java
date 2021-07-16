@@ -42,4 +42,12 @@ public class ExceptionController {
 		mView.setViewName("error/data_access");
 		return mView;
 	}
+	//custom 예외 처리
+	@ExceptionHandler(NoDeliveryException.class)
+	public ModelAndView noDelivery(NoDeliveryException nde) {
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("exception", nde);
+		mView.setViewName("error/data_access");
+		return mView;
+	}
 }
